@@ -18,7 +18,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
 
@@ -31,8 +30,7 @@ public abstract class Usuario implements Serializable {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @TableGenerator(name = "USUARIO_GEN", table = "USUARIO_GEN", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize = 1)           
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "USUARIO_GEN")
+    @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)

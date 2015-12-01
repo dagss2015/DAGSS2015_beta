@@ -6,6 +6,7 @@ package es.uvigo.esei.dagss.controladores.medico;
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
+import es.uvigo.esei.dagss.dominio.daos.PacienteDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.TipoUsuario;
 import javax.inject.Named;
@@ -15,6 +16,9 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import es.uvigo.esei.dagss.dominio.entidades.Paciente;
+import java.util.List;
+import javax.annotation.PostConstruct;
 
 /**
  *
@@ -29,6 +33,7 @@ public class MedicoControlador implements Serializable {
     private String dni;
     private String numeroColegiado;
     private String password;
+    private List<Paciente> pacientes;
 
     @Inject
     private AutenticacionControlador autenticacionControlador;
@@ -36,11 +41,17 @@ public class MedicoControlador implements Serializable {
 
     @EJB
     private MedicoDAO medicoDAO;
+    @EJB
+    private PacienteDAO pacienteDAO;
 
     /**
      * Creates a new instance of AdministradorControlador
      */
     public MedicoControlador() {
+    }
+    
+    public void cargarPacientes(){
+        pacientes= pacienteDAO.buscarPorMedico(medicoActual.getId()); 
     }
 
     public String getDni() {
@@ -70,6 +81,7 @@ public class MedicoControlador implements Serializable {
     public Medico getMedicoActual() {
         return medicoActual;
     }
+   
 
     public void setMedicoActual(Medico medicoActual) {
         this.medicoActual = medicoActual;
@@ -102,7 +114,9 @@ public class MedicoControlador implements Serializable {
                 if (autenticacionControlador.autenticarUsuario(medico.getId(), password,
                         TipoUsuario.MEDICO.getEtiqueta().toLowerCase())) {
                     medicoActual = medico;
+                    cargarPacientes();
                     destino = "privado/index";
+                 
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Credenciales de acceso incorrectas", ""));
                 }
@@ -115,4 +129,9 @@ public class MedicoControlador implements Serializable {
     public String doShowCita() {
         return "detallesCita";
     }
+    public List<Paciente>  getPacientes(){
+       return pacientes;           
+    }
+    
+    
 }

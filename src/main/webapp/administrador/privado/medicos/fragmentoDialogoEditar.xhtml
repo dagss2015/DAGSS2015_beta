@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition>
-        <p:dialog id="dialogoEditar" widgetVar="DialogoEditar" modal="true" resizable="false" appendTo="@(body)" header="Editar Médico">
+        <p:dialog id="dialogoEditar" widgetVar="DialogoEditar" modal="true" resizable="false" appendTo="@(body)" header="Editar Centro de Salud">
             <h:form id="formularioEditar">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{gestionMedicosControlador.medicoActual != null}">
@@ -34,16 +34,16 @@
 
                         <h:outputLabel value="Centro salud:" for="centrosalud"/>
                         <p:selectOneMenu id="centrosalud" value="#{gestionMedicosControlador.medicoActual.centroSalud}"
-                                         converter="omnifaces.SelectItemsConverter">                
+                                         converter="centroSaludConverter">                
                             <f:selectItems var="itemCentroSalud" value="#{gestionMedicosControlador.centrosSalud}"
                                            itemValue="#{itemCentroSalud}" itemLabel="#{itemCentroSalud.nombre} (#{itemCentroSalud.direccion.localidad})" />
                         </p:selectOneMenu>                                                             
 
                         <h:outputLabel value="Password:" for="password1"/>
-                        <h:inputSecret id="password1" value="#{gestionMedicosControlador.password1}"/>
+                        <h:inputSecret id="password1" value="#{gestionMedicosControlador.password1}" required="true"/>
 
                         <h:outputLabel value="Repetir password:" for="password2"/>
-                        <h:inputSecret id="password2" value="#{gestionMedicosControlador.password2}"/>
+                        <h:inputSecret id="password2" value="#{gestionMedicosControlador.password2}" required="true"/>
 
                     </p:panelGrid>
                     <p:commandButton value="Guardar" actionListener="#{gestionMedicosControlador.doGuardarEditado()}"  

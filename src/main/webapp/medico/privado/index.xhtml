@@ -19,6 +19,25 @@
             </ui:define>
 
             <ui:define name="contenido">
+                <h:outputText value="#{medicoControlador.medicoActual.dni}"/>
+                <h:form>
+                    <h:dataTable value="#{medicoControlador.pacientes}" var="paciente" >  
+                        <h:column>
+                            <h:outputText value="#{paciente.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{paciente.dni}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{paciente.medico.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{paciente.email}"/>
+                        </h:column>
+                    </h:dataTable>     
+                </h:form>
+
+                    
             </ui:define>
         </ui:composition>
 

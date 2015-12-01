@@ -60,6 +60,11 @@ public class PacienteDAO extends GenericoDAO<Paciente> {
         q.setParameter("patron","%"+localidad+"%");        
         return q.getResultList();
     }
-
+    public List<Paciente> buscarPorMedico(Long idmedico) {
+        Query q = em.createQuery("SELECT p FROM Paciente AS p "
+                + "  WHERE p.medico.id = :idMedico");
+        q.setParameter("idMedico",idmedico);        
+        return q.getResultList();
+    }
     // Completar aqui
 }

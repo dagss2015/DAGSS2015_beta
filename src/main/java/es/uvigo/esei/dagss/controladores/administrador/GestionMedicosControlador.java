@@ -100,52 +100,39 @@ public class GestionMedicosControlador implements Serializable {
         medicoActual = medico;   // Otra alternativa: volver a refrescarlos desde el DAO
     }
 
-    private boolean passwordsVacios() {
-        if ((password1 == null) && (password2 == null)) {
-            return true;
-        } else {
-            return (password1.isEmpty() && password2.isEmpty());
-        }
-    }
-
     private boolean passwordsValidos() {
-        return (!passwordsVacios() && password1.equals(password2));
+        if ((password1 != null) && (password2 != null)) {
+            return password1.equals(password2);
+        }
+        return false;
     }
-    
 
     public void doGuardarNuevo() {
         if (passwordsValidos()) {
-            // Crea  nuevo
+            // Crea un nuevo Medico
             medicoActual = medicoDAO.crear(medicoActual);
 
-            // Ajustar password 
+            // Ajustar su password
             usuarioDAO.actualizarPassword(medicoActual.getId(), password1);
 
-            // Actualiza lista 
+            // Actualiza lista de medicos a mostrar
             medicos = medicoDAO.buscarTodos();
+
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Password incorrecto (usente o no coincidencia)", ""));
         }
     }
 
     public void doGuardarEditado() {
-        if (passwordsVacios()) { // No modifica password
-            // Actualiza 
+        if (passwordsValidos()) {
+            // Actualiza un Medico
             medicoActual = medicoDAO.actualizar(medicoActual);
-
-            // Actualiza lista 
-            medicos = medicoDAO.buscarTodos();        
-        } else if (password1.equals(password2)) {
-            // Actualiza
-            medicoActual = medicoDAO.actualizar(medicoActual);
-
-            // Actualiza lista a mostrar
-            medicos = medicoDAO.buscarTodos();        
-
-            // Ajustar su password 
+            
+            // Ajustar su password
             usuarioDAO.actualizarPassword(medicoActual.getId(), password1);
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Passwords incorrectos (no coincidencia)", ""));
+            
+            // Actualiza lista de medicos a mostrar
+            medicos = medicoDAO.buscarTodos();
         }
     }
 
