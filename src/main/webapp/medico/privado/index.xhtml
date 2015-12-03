@@ -10,7 +10,7 @@
 
         <ui:composition template="/plantillas/plantillaGlobal.xhtml">
 
-            <ui:define name="tituloPagina">
+            <ui:define name="Agenda Diaria">
                 tituloPagina
             </ui:define>            
 
@@ -21,20 +21,29 @@
             <ui:define name="contenido">
                 <h:outputText value="#{medicoControlador.medicoActual.dni}"/>
                 <h:form>
-                    <h:dataTable value="#{medicoControlador.pacientes}" var="paciente" >  
+                    <form class="form-horizontal">
+                       <h:dataTable value="#{medicoControlador.citasMedico}" var="cita" >  
                         <h:column>
-                            <h:outputText value="#{paciente.nombre}"/>
+                            <h:outputText value="#{cita.paciente.nombre}"/>
                         </h:column>
                         <h:column>
-                            <h:outputText value="#{paciente.dni}"/>
+                            <h:outputText value="#{cita.paciente.dni}"/>
                         </h:column>
                         <h:column>
-                            <h:outputText value="#{paciente.medico.nombre}"/>
+                            <h:outputText value="#{cita.paciente.medico.nombre}"/>
                         </h:column>
                         <h:column>
-                            <h:outputText value="#{paciente.email}"/>
+                            <h:outputText value="#{cita.paciente.email}"/>
                         </h:column>
-                    </h:dataTable>     
+                        <h:column>
+                            <button type="submit" class="btn btn-default" onclick="showCita()">MostrarCita</button>
+                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
+                        </h:column>
+                        <h:column>
+                            <input name="revisado" type="checkbox" value="Revisado"/>
+                        </h:column>
+                       </h:dataTable>  
+                    </form>
                 </h:form>
 
                     
