@@ -8,6 +8,7 @@ import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PacienteDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
+import es.uvigo.esei.dagss.dominio.entidades.Cita;
 import es.uvigo.esei.dagss.dominio.entidades.TipoUsuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
+import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
@@ -34,6 +36,7 @@ public class MedicoControlador implements Serializable {
     private String numeroColegiado;
     private String password;
     private List<Paciente> pacientes;
+    private List<Cita> citasMedico;
 
     @Inject
     private AutenticacionControlador autenticacionControlador;
@@ -43,6 +46,8 @@ public class MedicoControlador implements Serializable {
     private MedicoDAO medicoDAO;
     @EJB
     private PacienteDAO pacienteDAO;
+    @EJB
+    private CitaDAO citaDAO;
 
     /**
      * Creates a new instance of AdministradorControlador
@@ -52,6 +57,9 @@ public class MedicoControlador implements Serializable {
     
     public void cargarPacientes(){
         pacientes= pacienteDAO.buscarPorMedico(medicoActual.getId()); 
+    }
+    public void cargarPacientesHoy(){    
+        citasMedico=citaDAO.getCitasMedico(medicoActual.getId(),Calendar.getInstance().getTime());
     }
 
     public String getDni() {
