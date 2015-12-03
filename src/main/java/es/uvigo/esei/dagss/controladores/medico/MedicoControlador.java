@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
@@ -58,8 +59,8 @@ public class MedicoControlador implements Serializable {
     public void cargarPacientes(){
         pacientes= pacienteDAO.buscarPorMedico(medicoActual.getId()); 
     }
-    public void cargarPacientesHoy(){    
-        citasMedico=citaDAO.getCitasMedico(medicoActual.getId(),Calendar.getInstance().getTime());
+    public void cargarPacientesHoy(Date hoy){    
+        citasMedico=citaDAO.getCitasMedico(medicoActual.getId(),hoy);
     }
 
     public String getDni() {
@@ -123,6 +124,7 @@ public class MedicoControlador implements Serializable {
                         TipoUsuario.MEDICO.getEtiqueta().toLowerCase())) {
                     medicoActual = medico;
                     cargarPacientes();
+                    cargarPacientesHoy(Calendar.getInstance().getTime());
                     destino = "privado/index";
                  
                 } else {
@@ -137,6 +139,12 @@ public class MedicoControlador implements Serializable {
     public String doShowCita() {
         return "detallesCita";
     }
+    public String doNewDay(Date dia) {   
+        cargarPacientesHoy(dia);
+        String destino = "privado/index";
+        return destino;
+    }
+    
     public List<Paciente>  getPacientes(){
        return pacientes;           
     }
