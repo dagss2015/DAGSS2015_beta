@@ -1,5 +1,5 @@
 /*
- Proyecto Java EE, DAGSS-2013
+ Proyecto Java EE, DAGSS-2013 sdighodghds
  */
 package es.uvigo.esei.dagss.controladores.medico;
 
