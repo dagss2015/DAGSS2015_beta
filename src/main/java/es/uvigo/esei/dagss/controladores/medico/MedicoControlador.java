@@ -59,7 +59,7 @@ public class MedicoControlador implements Serializable {
     public void cargarPacientes(){
         pacientes= pacienteDAO.buscarPorMedico(medicoActual.getId()); 
     }
-    public void cargarPacientesHoy(Date hoy){    
+    public void cargarCitasHoy(Date hoy){    
         citasMedico=citaDAO.getCitasMedico(medicoActual.getId(),hoy);
     }
 
@@ -124,7 +124,7 @@ public class MedicoControlador implements Serializable {
                         TipoUsuario.MEDICO.getEtiqueta().toLowerCase())) {
                     medicoActual = medico;
                     cargarPacientes();
-                    cargarPacientesHoy(Calendar.getInstance().getTime());
+                    cargarCitasHoy(Calendar.getInstance().getTime());
                     destino = "privado/index";
                  
                 } else {
@@ -140,13 +140,15 @@ public class MedicoControlador implements Serializable {
         return "detallesCita";
     }
     public String doNewDay(Date dia) {   
-        cargarPacientesHoy(dia);
-        String destino = "privado/index";
-        return destino;
+        cargarCitasHoy(dia);
+        return null;
     }
     
     public List<Paciente>  getPacientes(){
        return pacientes;           
+    }
+    public List<Cita>  getCitasMedico(){
+       return citasMedico;           
     }
     
     

@@ -18,7 +18,7 @@ public class CitaDAO  extends GenericoDAO<Cita>{
 
     public List<Cita> getCitasMedico(Long idMedico,Date fecha){
         Query q = em.createQuery("SELECT c FROM Cita AS c "
-                + "  WHERE (c.medico.id = :idMedico AND c.fecha = :fecha  ");
+                + "  WHERE (c.medico.id = :idMedico AND c.fecha = :fecha ) ");
         q.setParameter("idMedico", idMedico);
         q.setParameter("fecha", fecha);
         return q.getResultList();
