@@ -27,7 +27,7 @@
                                  var="medico" 
                                  selection="#{gestionMedicosControlador.medicoActual}"
                                  selectionMode="single"
-                                 paginator="true" rows="10" rowKey="#{medico.id}">
+                                 paginator="true" paginatorPosition="bottom" rows="10" rowKey="#{medico.id}">
 
                         <p:ajax event="rowSelect"   update="botonNuevo botonVer botonEditar botonBorrar"/>
 
@@ -63,7 +63,14 @@
                             <p:outputLabel value="#{medico.fechaAlta}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </p:outputLabel>
+                        </p:column>                        
+                        
+                        <p:column headerText="Ultimo acceso">
+                            <p:outputLabel value="#{medico.ultimoAcceso}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:outputLabel>
                         </p:column>
+                        
                         <f:facet name="footer">
                             <p:commandButton id="botonNuevo"  icon="ui-icon-plus"   value="Nuevo"  actionListener="#{gestionMedicosControlador.doNuevo()}" update=":formularioNuevo" oncomplete="PF('DialogoNuevo').show()"/>
                             <p:commandButton id="botonVer"    icon="ui-icon-search" value="Ver"    update=":formularioVer" oncomplete="PF('DialogoVer').show()" disabled="#{empty gestionMedicosControlador.medicoActual}"/>
