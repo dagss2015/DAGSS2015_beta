@@ -18,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
+import es.uvigo.esei.dagss.dominio.entidades.Tratamiento;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,8 +37,11 @@ public class MedicoControlador implements Serializable {
     private String dni;
     private String numeroColegiado;
     private String password;
+    private Cita citaActual;
+    private Date diaActual;
     private List<Paciente> pacientes;
     private List<Cita> citasMedico;
+    private List<Tratamiento> tratamientos;
 
     @Inject
     private AutenticacionControlador autenticacionControlador;
@@ -54,6 +58,7 @@ public class MedicoControlador implements Serializable {
      * Creates a new instance of AdministradorControlador
      */
     public MedicoControlador() {
+        diaActual=Calendar.getInstance().getTime();
     }
     
     public void cargarPacientes(){
@@ -136,12 +141,17 @@ public class MedicoControlador implements Serializable {
     }
 
     //Acciones
-    public String doShowCita() {
-        return "detallesCita";
+    public String doShowCita(Cita citaActual) {
+        this.citaActual=citaActual;
+        return "privado/detallesCita";
     }
-    public String doNewDay(Date dia) {   
+    public String doShowTratamiento() {
+        return "privado/detallesTratamiento";
+    }
+    public String doNewDay(Date dia) {  
+        diaActual=dia;
         cargarCitasHoy(dia);
-        return null;
+        return "privado/index";
     }
     
     public List<Paciente>  getPacientes(){
