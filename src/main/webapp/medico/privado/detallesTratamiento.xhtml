@@ -25,29 +25,22 @@
             <ui:define name="contenido">
                 <h:outputText value="#{medicoControlador.medicoActual.dni}"/>
                 <h:form>
-                    <form class="form-horizontal">
-                       <h:dataTable value="#{medicoControlador.citasMedico}" var="cita" >
+                <h:form>
+
+                       <h:dataTable value="#{medicoControlador.tratamientos}" var="tratamiento" >
                         <h:column>
-                            <h:outputText value="#{cita.paciente.nombre}"/>
+                            <h:outputText value="#{tratamiento.paciente.nombre}"/>
                         </h:column>
                         <h:column>
-                            <h:outputText value="#{cita.paciente.dni}"/>
+                            <h:outputText value="#{tratamiento.medico.nombre}"/>
                         </h:column>
+                        
                         <h:column>
-                            <h:outputText value="#{cita.paciente.medico.nombre}"/>
-                        </h:column>
-                        <h:column>
-                            <h:outputText value="#{cita.paciente.email}"/>
-                        </h:column>
-                        <h:column>
-                            <h:commandButton type="Mostrar detalles" onclick="#{medicoControlador.doShowCita(cita)}"/>
+                            <h:commandButton  value="volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
                             <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
                         </h:column>
-                        <h:column>
-                            <input name="revisado" type="checkbox" value="Revisado"/>
-                        </h:column>
+                        
                        </h:dataTable>
-                    </form>
                 </h:form>
 
 

@@ -19,9 +19,15 @@
             </ui:define>
 
             <ui:define name="contenido">
-                <h:outputText value="#{medicoControlador.medicoActual.dni}"/>
                 <h:form>
-                    <form class="form-horizontal">
+                    <p:column headerText="FechaActual">
+                        <p:outputLabel value="#{medicoControlador.diaActual}">
+                       <f:convertDateTime pattern="dd/MM/yyyy"/>
+                       </p:outputLabel>
+                    </p:column>
+                </h:form>
+                <h:form>
+
                        <h:dataTable value="#{medicoControlador.citasMedico}" var="cita" >
                         <h:column>
                             <h:outputText value="#{cita.paciente.nombre}"/>
@@ -36,14 +42,26 @@
                             <h:outputText value="#{cita.paciente.email}"/>
                         </h:column>
                         <h:column>
-                            <h:commandButton type="Mostrar detalles" onclick="#{medicoControlador.doShowCita(cita)}"/>
+                            <h:commandButton  value="Mostrar Cita" action="#{medicoControlador.doShowCita(cita)}"/>
                             <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
                         </h:column>
                         <h:column>
-                            <input name="revisado" type="checkbox" value="Revisado"/>
+                            <h:commandButton value="Completar" action="#{medicoControlador.doMarcarCitaCompletada(cita)}"/>
+                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Anular" action="#{medicoControlador.doMarcarCitaAnulada(cita)}"/>
+                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Ausente" action="#{medicoControlador.doMarcarCitaAusente(cita)}"/>
+                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{medicoControlador.getEstadoCita(cita)}"/>
+                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
                         </h:column>
                        </h:dataTable>
-                    </form>
                 </h:form>
 
 

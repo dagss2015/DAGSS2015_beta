@@ -9,6 +9,7 @@ import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PacienteDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
+import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
 import es.uvigo.esei.dagss.dominio.entidades.TipoUsuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -22,7 +23,6 @@ import es.uvigo.esei.dagss.dominio.entidades.Tratamiento;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 
 /**
  *
@@ -66,6 +66,18 @@ public class MedicoControlador implements Serializable {
     }
     public void cargarCitasHoy(Date hoy){    
         citasMedico=citaDAO.getCitasMedico(medicoActual.getId(),hoy);
+    }
+    public Date getDiaActual(){
+        return diaActual;
+    }
+    public List<Tratamiento> getTratamiento(){
+        return tratamientos;
+    }
+    public List<Paciente>  getPacientes(){
+       return pacientes;           
+    }
+    public List<Cita>  getCitasMedico(){
+       return citasMedico;           
     }
 
     public String getDni() {
@@ -143,7 +155,7 @@ public class MedicoControlador implements Serializable {
     //Acciones
     public String doShowCita(Cita citaActual) {
         this.citaActual=citaActual;
-        return "privado/detallesCita";
+        return "detallesCita";
     }
     public String doShowTratamiento() {
         return "privado/detallesTratamiento";
@@ -153,13 +165,33 @@ public class MedicoControlador implements Serializable {
         cargarCitasHoy(dia);
         return "privado/index";
     }
+    ///marcado citas
+    public void doMarcarCitaCompletada(Cita cita){
+        cita.setEstado(EstadoCita.COMPLETADA);
+        citaDAO.actualizar(cita);
+        cargarCitasHoy(diaActual);
+    }
+    public void doMarcarCitaAnulada(Cita cita){
+        cita.setEstado(EstadoCita.ANULADA);
+        citaDAO.actualizar(cita);
+        cargarCitasHoy(diaActual);
+    }
+    public void doMarcarCitaAusente(Cita cita){
+        cita.setEstado(EstadoCita.AUSENTE);
+        citaDAO.actualizar(cita);
+        cargarCitasHoy(diaActual);
+    }
+    public void doMarcarCitaPlanificada(Cita cita){
+        cita.setEstado(EstadoCita.PLANIFICADA);
+        citaDAO.actualizar(cita);
+        cargarCitasHoy(diaActual);
+    }
+    public String getEstadoCita(Cita cita){
+        return cita.getEstado().name();
+    }
+    /////////////////////////////
     
-    public List<Paciente>  getPacientes(){
-       return pacientes;           
-    }
-    public List<Cita>  getCitasMedico(){
-       return citasMedico;           
-    }
+    
     
     
 }
