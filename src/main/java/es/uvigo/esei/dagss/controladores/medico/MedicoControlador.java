@@ -79,6 +79,9 @@ public class MedicoControlador implements Serializable {
     public List<Cita>  getCitasMedico(){
        return citasMedico;           
     }
+    public Cita getCitaActual(){
+        return citaActual;
+    }
 
     public String getDni() {
         return dni;
@@ -158,12 +161,12 @@ public class MedicoControlador implements Serializable {
         return "detallesCita";
     }
     public String doShowTratamiento() {
-        return "privado/detallesTratamiento";
+        return "detallesTratamiento";
     }
     public String doNewDay(Date dia) {  
         diaActual=dia;
         cargarCitasHoy(dia);
-        return "privado/index";
+        return "index";
     }
     ///marcado citas
     public void doMarcarCitaCompletada(Cita cita){

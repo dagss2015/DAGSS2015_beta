@@ -24,21 +24,26 @@
 
             <ui:define name="contenido">
                 <h:form>
+                    <h:outputText value="#{medicoControlador.citaActual.medico.nombre}"/>
+                    <h:outputText value="#{medicoControlador.citaActual.paciente.nombre}"/>
+                    <h:outputText value="#{medicoControlador.citaActual.duracion}"/>
+                    <h:outputText value="#{medicoControlador.citaActual.estado.etiqueta}"/>
+                    <h:outputText value="#{medicoControlador.citaActual.fecha.hours}"/>
+                   
 
-                       <h:dataTable value="#{medicoControlador.tratamientos}" var="tratamiento" >
+                    <h:dataTable value="#{medicoControlador.tratamiento}" var="tratamiento" >
                         <h:column>
-                            <h:outputText value="#{tratamiento.paciente.nombre}"/>
+                            <h:outputText value="#{tratamiento.id}"/>
                         </h:column>
                         <h:column>
-                            <h:outputText value="#{tratamiento.medico.nombre}"/>
+                            <h:outputText value="#{tratamiento.fechaInicio}"/>
                         </h:column>
-                        
                         <h:column>
-                            <h:commandButton  value="volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
-                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
+                            <h:outputText value="#{tratamiento.fechaFin}"/>
                         </h:column>
-                        
                        </h:dataTable>
+                       <h:commandButton  value="volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
+                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
                 </h:form>
             </ui:define>
         </ui:composition>
