@@ -21,14 +21,14 @@
             <ui:define name="contenido">
                 <h:form>
                     <p:column headerText="FechaActual">
-                        <p:outputLabel value="#{medicoControlador.diaActual}">
-                       <f:convertDateTime pattern="dd/MM/yyyy"/>
-                       </p:outputLabel>
+                        <p:calendar value="#{medicoControlador.diaActual}">
+                            <p:ajax event="dateSelect" update="panelCitas" listener="#{medicoControlador.actualizarCitas()}"/>
+                        </p:calendar>
+                       
                     </p:column>
-                </h:form>
-                <h:form>
+               
 
-                       <h:dataTable value="#{medicoControlador.citasMedico}" var="cita" >
+                       <h:dataTable id="panelCitas" value="#{medicoControlador.citasMedico}" var="cita" >
                         <h:column>
                             <h:outputText value="#{cita.paciente.nombre}"/>
                         </h:column>

@@ -39,6 +39,7 @@ public class MedicoControlador implements Serializable {
     private String password;
     private Cita citaActual;
     private Date diaActual;
+    private Tratamiento tratamientoActual;
     private List<Paciente> pacientes;
     private List<Cita> citasMedico;
     private List<Tratamiento> tratamientos;
@@ -160,7 +161,8 @@ public class MedicoControlador implements Serializable {
         this.citaActual=citaActual;
         return "detallesCita";
     }
-    public String doShowTratamiento() {
+    public String doShowTratamiento(Tratamiento tratamiento) {
+        tratamientoActual=tratamiento;
         return "detallesTratamiento";
     }
     public String doNewDay(Date dia) {  
@@ -196,5 +198,8 @@ public class MedicoControlador implements Serializable {
     
     
     
-    
+    public void actualizarCitas() {
+        System.out.println("entra citas "+diaActual.toString());
+        cargarCitasHoy(diaActual);
+    }
 }

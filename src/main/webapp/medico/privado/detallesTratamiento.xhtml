@@ -23,24 +23,10 @@
             </br>
 
             <ui:define name="contenido">
-                <h:outputText value="#{medicoControlador.medicoActual.dni}"/>
+            
                 <h:form>
-                <h:form>
-
-                       <h:dataTable value="#{medicoControlador.tratamiento}" var="tratamiento" >
-                        <h:column>
-                            <h:outputText value="#{tratamiento.paciente.nombre}"/>
-                        </h:column>
-                        <h:column>
-                            <h:outputText value="#{tratamiento.medico.nombre}"/>
-                        </h:column>
-                        
-                        <h:column>
-                            <h:commandButton  value="volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
-                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
-                        </h:column>
-                        
-                       </h:dataTable>
+                   
+                        <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
                 </h:form>
 
 

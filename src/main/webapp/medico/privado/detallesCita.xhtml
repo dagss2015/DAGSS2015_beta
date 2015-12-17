@@ -18,18 +18,11 @@
                 izquierda
             </ui:define>
 
-            <br>
-              Date: <input type="text" id="datepicker"/>
-            </br>
 
             <ui:define name="contenido">
                 <h:form>
-                    <h:outputText value="#{medicoControlador.citaActual.medico.nombre}"/>
-                    <h:outputText value="#{medicoControlador.citaActual.paciente.nombre}"/>
-                    <h:outputText value="#{medicoControlador.citaActual.duracion}"/>
-                    <h:outputText value="#{medicoControlador.citaActual.estado.etiqueta}"/>
-                    <h:outputText value="#{medicoControlador.citaActual.fecha.hours}"/>
-                   
+                    <h:outputText value="#{medicoControlador.citaActual.fecha.minutes}   #{medicoControlador.citaActual.medico.nombre}  #{medicoControlador.citaActual.duracion}    #{medicoControlador.citaActual.estado.etiqueta} #{medicoControlador.citaActual.fecha.hours}     "/>
+                    
 
                     <h:dataTable value="#{medicoControlador.tratamiento}" var="tratamiento" >
                         <h:column>
@@ -41,6 +34,10 @@
                         <h:column>
                             <h:outputText value="#{tratamiento.fechaFin}"/>
                         </h:column>
+                        <h:column>
+                            <h:commandButton  value="nuevo Tratamiento" action="#{medicoControlador.doShowTratamiento(tratamiento)}"/>
+                        </h:column>
+                        
                        </h:dataTable>
                        <h:commandButton  value="volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
                             <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
