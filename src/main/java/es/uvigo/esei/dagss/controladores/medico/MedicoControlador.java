@@ -7,6 +7,7 @@ import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PacienteDAO;
+import es.uvigo.esei.dagss.dominio.daos.TratamientoDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
 import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
@@ -20,9 +21,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
 import es.uvigo.esei.dagss.dominio.entidades.Tratamiento;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -39,6 +42,8 @@ public class MedicoControlador implements Serializable {
     private String password;
     private Cita citaActual;
     private Date diaActual;
+    private Date fechaFinalTratamiento;
+    private Date fechaInicioTratamiento;
     private Tratamiento tratamientoActual;
     private List<Paciente> pacientes;
     private List<Cita> citasMedico;
@@ -54,6 +59,8 @@ public class MedicoControlador implements Serializable {
     private PacienteDAO pacienteDAO;
     @EJB
     private CitaDAO citaDAO;
+     @EJB
+    private TratamientoDAO tratamientoDAO;
 
     /**
      * Creates a new instance of AdministradorControlador
@@ -61,15 +68,27 @@ public class MedicoControlador implements Serializable {
     public MedicoControlador() {
         diaActual=Calendar.getInstance().getTime();
     }
-    
+    public void letMe(){
+        System.out.println(tratamientoActual.getFechaInicio().toString());
+        System.out.println(tratamientoActual.getFechaFin().toString());
+    }
+    public void cargarTratamientos(){
+        tratamientos=tratamientoDAO.getTratamientoPaciente(citaActual.getPaciente().getId());
+    }
     public void cargarPacientes(){
         pacientes= pacienteDAO.buscarPorMedico(medicoActual.getId()); 
     }
     public void cargarCitasHoy(Date hoy){    
         citasMedico=citaDAO.getCitasMedico(medicoActual.getId(),hoy);
     }
+    public Tratamiento getTratamientoActual(){
+        return tratamientoActual;
+    }
     public Date getDiaActual(){
         return diaActual;
+    }
+    public void setDiaActual(Date dia){
+        diaActual=dia;
     }
     public List<Tratamiento> getTratamiento(){
         return tratamientos;
@@ -157,6 +176,10 @@ public class MedicoControlador implements Serializable {
     }
 
     //Acciones
+    public String doNewTratamiento(){
+        tratamientoActual=new Tratamiento(citaActual.getPaciente(),citaActual.getMedico(), "nada aun", diaActual, diaActual);
+        return "newTratamiento";
+    }
     public String doShowCita(Cita citaActual) {
         this.citaActual=citaActual;
         return "detallesCita";
@@ -195,11 +218,13 @@ public class MedicoControlador implements Serializable {
         return cita.getEstado().name();
     }
     /////////////////////////////
-    
-    
-    
-    public void actualizarCitas() {
+    public void actualizarCitas(SelectEvent event) {
         System.out.println("entra citas "+diaActual.toString());
         cargarCitasHoy(diaActual);
     }
+    public void guardarTratamiento(){
+        tratamientoDAO.actualizar(tratamientoActual);
+        cargarTratamientos();
+    }
+
 }

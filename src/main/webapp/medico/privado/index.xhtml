@@ -21,8 +21,8 @@
             <ui:define name="contenido">
                 <h:form>
                     <p:column headerText="FechaActual">
-                        <p:calendar value="#{medicoControlador.diaActual}">
-                            <p:ajax event="dateSelect" update="panelCitas" listener="#{medicoControlador.actualizarCitas()}"/>
+                        <p:calendar id="event" value="#{medicoControlador.diaActual}">
+                            <p:ajax event="dateSelect" update="panelCitas" listener="#{medicoControlador.actualizarCitas}"/>
                         </p:calendar>
                        
                     </p:column>

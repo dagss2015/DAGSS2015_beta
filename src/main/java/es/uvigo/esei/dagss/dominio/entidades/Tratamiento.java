@@ -50,6 +50,10 @@ public class Tratamiento implements Serializable {
 
     public Tratamiento() {
     }
+    public Tratamiento(Paciente paciente, Medico medico) {
+        this.paciente = paciente;
+        this.medico = medico;
+    }
 
     public Tratamiento(Paciente paciente, Medico medico, String comentarios, Date fechaInicio, Date fechaFin) {
         this.paciente = paciente;
