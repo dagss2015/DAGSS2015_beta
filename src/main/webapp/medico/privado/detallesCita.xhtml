@@ -21,31 +21,18 @@
 
             <ui:define name="contenido">
                 <h:form>
+                    
                     <h:panelGrid columns="1">
-                    <h:outputText value="Fecha cita= #{medicoControlador.citaActual.toString()}  "/>
-                    <h:outputText  value="Paciente=  #{medicoControlador.citaActual.paciente.nombre} "/>
-                    <h:outputText  value="Duracion= #{medicoControlador.citaActual.duracion} "/>
-                    <h:outputText  value="Estado=#{medicoControlador.citaActual.estado.etiqueta}  "/>
+                        <h:outputText value="Fecha cita= #{medicoControlador.citaActual.toString()}  "/>
+                        <h:outputText  value="Paciente=  #{medicoControlador.citaActual.paciente.nombre} "/>
+                        <h:outputText  value="Duracion= #{medicoControlador.citaActual.duracion} "/>
+                        <h:outputText  value="Estado=#{medicoControlador.citaActual.estado.etiqueta}  "/>
                     </h:panelGrid>
-                    <h:dataTable value="#{medicoControlador.tratamiento}" var="tratamiento" >
-                        <h:column>
-                            <h:outputText value="ID tratamiento= "/>
-                            <h:outputText value="#{tratamiento.id}"/>
-                        </h:column>
-                        <h:column>
-                            <h:outputText value="#{tratamiento.fechaInicio}"/>
-                        </h:column>
-                        <h:column>
-                            <h:outputText value="#{tratamiento.fechaFin}"/>
-                        </h:column>
-                        <h:column>
-                            <h:commandButton  value="detalles tratamiento" action="#{medicoControlador.doShowTratamiento(tratamiento)}"/>
-                        </h:column>
-                        
-                       </h:dataTable>
-                       <h:commandButton  value="volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
-                       <h:commandButton  value="nuevo tratamiento" action="#{medicoControlador.doNewTratamiento}"/>
-                            <!--<input type="submit" name=" MostrarCita" value="MostrarCita" />-->
+                    
+                    <h:commandButton  value="Volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
+                    <h:commandButton  value="Nuevo Tratamiento" action="#{medicoControlador.doNewTratamiento}"/>
+                    <h:commandButton  value="Detalles Tratamiento" action="#{medicoControlador.doShowTratamiento(medicoControlador.tratamientoActual)}"/>
+                
                 </h:form>
             </ui:define>
         </ui:composition>

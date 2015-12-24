@@ -59,7 +59,7 @@ public class MedicoControlador implements Serializable {
     private PacienteDAO pacienteDAO;
     @EJB
     private CitaDAO citaDAO;
-     @EJB
+    @EJB
     private TratamientoDAO tratamientoDAO;
 
     /**
@@ -81,9 +81,6 @@ public class MedicoControlador implements Serializable {
     public void cargarCitasHoy(Date hoy){    
         citasMedico=citaDAO.getCitasMedico(medicoActual.getId(),hoy);
     }
-    public Tratamiento getTratamientoActual(){
-        return tratamientoActual;
-    }
     public Date getDiaActual(){
         return diaActual;
     }
@@ -102,7 +99,10 @@ public class MedicoControlador implements Serializable {
     public Cita getCitaActual(){
         return citaActual;
     }
-
+    public Tratamiento getTratamientoActual(){
+        return tratamientoActual;
+    }
+    
     public String getDni() {
         return dni;
     }
@@ -184,8 +184,8 @@ public class MedicoControlador implements Serializable {
         this.citaActual=citaActual;
         return "detallesCita";
     }
-    public String doShowTratamiento(Tratamiento tratamiento) {
-        tratamientoActual=tratamiento;
+    public String doShowTratamiento(Tratamiento tratamientoActual) {
+        this.tratamientoActual=tratamientoActual;
         return "detallesTratamiento";
     }
     public String doNewDay(Date dia) {  

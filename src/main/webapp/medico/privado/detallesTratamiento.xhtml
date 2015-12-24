@@ -18,15 +18,19 @@
                 izquierda
             </ui:define>
 
-            <br>
-              Date: <input type="text" id="datepicker"/>
-            </br>
-
             <ui:define name="contenido">
             
                 <h:form>
-                   
-                        <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
+                    
+                        <h:panelGrid id="tratamiento" columns="1">
+                            
+                            <h:outputText value="Nombre: #{medicoControlador.tratamientoActual.paciente.nombre}"/>
+                            <h:outputText value="Descripción: #{medicoControlador.tratamientoActual.comentarios}"/>
+                            <h:outputText value="Fecha inicio: #{medicoControlador.tratamientoActual.fechaInicio}"/>
+                            <h:outputText value="Fecha fin: #{medicoControlador.tratamientoActual.fechaFin}"/>                       
+                       </h:panelGrid>
+                    
+                       <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
                 </h:form>
 
 

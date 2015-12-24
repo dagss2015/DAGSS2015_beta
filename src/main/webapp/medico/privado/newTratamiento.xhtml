@@ -18,10 +18,6 @@
                 izquierda
             </ui:define>
 
-            <br>
-              Date: <input type="text" id="datepicker"/>
-            </br>
-
             <ui:define name="contenido">
             
                 <h:form>
@@ -48,8 +44,8 @@
                         <h:outputText value="#{medicoControlador.tratamientoActual.fechaFin}"/>
                         <h:outputText value="#{medicoControlador.tratamientoActual.comentarios}"/>
                     </h:panelGrid>
-                        <h:commandButton  value="guardar" action="#{medicoControlador.guardarTratamiento}"/>
-                        <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
+                        <h:commandButton  value="Guardar" action="#{medicoControlador.guardarTratamiento}"/>
+                        <h:commandButton  value="Volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
                 </h:form>
 
 
