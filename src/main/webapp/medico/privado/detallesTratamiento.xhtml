@@ -29,8 +29,28 @@
                             <h:outputText value="Fecha inicio: #{medicoControlador.tratamientoActual.fechaInicio}"/>
                             <h:outputText value="Fecha fin: #{medicoControlador.tratamientoActual.fechaFin}"/>                       
                        </h:panelGrid>
-                    
-                       <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
+                         <h:dataTable id="panelRecetas" value="#{medicoControlador.recetas}" var="receta" >
+                        <h:column>
+                            <h:outputText value="#{receta.cantidad}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{receta.inicioValidez}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{receta.finValidez}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{receta.farmacia.nombreFarmacia}"/>
+                        </h:column>
+                         <h:column>
+                            <h:outputText value="#{receta.prescripcion.medicamento}"/>
+                        </h:column>
+                             <h:column>
+                            <h:outputText value="#{receta.prescripcion.dosis}"/>
+                        </h:column>
+                      </h:dataTable>
+                    <h:commandButton  value="Nueva Receta" action="#{medicoControlador.doNewReceta()}"/>
+                      <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
                 </h:form>
 
 

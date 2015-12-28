@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <body>
+
+        <ui:composition template="/plantillas/plantillaGlobal.xhtml">
+
+            <ui:define name="Agenda Diaria">
+               Agenda Diaria
+            </ui:define>
+
+            <ui:define name="izquierda">
+                izquierda
+            </ui:define>
+
+            <ui:define name="contenido">
+            
+                <h:form>
+                        <p:column headerText="FechaInicio">
+                            <p:calendar id="event" value="#{medicoControlador.recetaActual.inicioValidez}">
+                            <p:ajax event="dateSelect" update="f"/>
+                        </p:calendar>
+                       
+                         </p:column>
+                         <p:column headerText="FechaFinal">
+                             <p:calendar id="event2" value="#{medicoControlador.recetaActual.finValidez}">
+                            <p:ajax event="dateSelect" update="f"/>
+                        </p:calendar> 
+                        </p:column>
+                     <p:column headerText="comentarios">
+                     <h:inputTextarea value="#{medicoControlador.tratamientoActual.comentarios}">
+                         <p:ajax event="keyup" update="f"/>
+                    </h:inputTextarea>
+                     </p:column>
+                     <h:panelGrid id="f" columns="1">
+                         <h:outputText value="#{medicoControlador.tratamientoActual.medico.nombre}"/>
+                        <h:outputText value="#{medicoControlador.letMe()}"/>
+                        <h:outputText value="#{medicoControlador.tratamientoActual.fechaInicio}"/>
+                        <h:outputText value="#{medicoControlador.tratamientoActual.fechaFin}"/>
+                        <h:outputText value="#{medicoControlador.tratamientoActual.comentarios}"/>
+                    </h:panelGrid>
+                        <h:commandButton  value="Guardar" action="#{medicoControlador.guardarTratamiento}"/>
+                        <h:commandButton  value="Volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
