@@ -42,8 +42,6 @@ public class MedicoControlador implements Serializable {
     private String password;
     private Cita citaActual;
     private Date diaActual;
-    private Date fechaFinalTratamiento;
-    private Date fechaInicioTratamiento;
     private Tratamiento tratamientoActual;
     private List<Paciente> pacientes;
     private List<Cita> citasMedico;
@@ -87,7 +85,7 @@ public class MedicoControlador implements Serializable {
     public void setDiaActual(Date dia){
         diaActual=dia;
     }
-    public List<Tratamiento> getTratamiento(){
+    public List<Tratamiento> getTratamientos(){
         return tratamientos;
     }
     public List<Paciente>  getPacientes(){
@@ -182,6 +180,7 @@ public class MedicoControlador implements Serializable {
     }
     public String doShowCita(Cita citaActual) {
         this.citaActual=citaActual;
+        cargarTratamientos();
         return "detallesCita";
     }
     public String doShowTratamiento(Tratamiento tratamientoActual) {

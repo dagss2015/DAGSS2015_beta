@@ -28,10 +28,29 @@
                         <h:outputText  value="Duracion= #{medicoControlador.citaActual.duracion} "/>
                         <h:outputText  value="Estado=#{medicoControlador.citaActual.estado.etiqueta}  "/>
                     </h:panelGrid>
-                    
+                     <h:dataTable id="panelTratamientos" value="#{medicoControlador.tratamientos}" var="tratamiento" >
+                        <h:column>
+                            <h:outputText value="#{tratamiento.paciente.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{tratamiento.paciente.dni}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{tratamiento.comentarios}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{tratamiento.fechaInicio}"/>
+                        </h:column>
+                         <h:column>
+                            <h:outputText value="#{tratamiento.fechaFin}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton  value="Detalles Tratamiento" action="#{medicoControlador.doShowTratamiento(tratamiento)}"/>
+                        </h:column>
+                      </h:dataTable>
                     <h:commandButton  value="Volver" action="#{medicoControlador.doNewDay(medicoControlador.diaActual)}"/>
                     <h:commandButton  value="Nuevo Tratamiento" action="#{medicoControlador.doNewTratamiento}"/>
-                    <h:commandButton  value="Detalles Tratamiento" action="#{medicoControlador.doShowTratamiento(medicoControlador.tratamientoActual)}"/>
+                    
                 
                 </h:form>
             </ui:define>
