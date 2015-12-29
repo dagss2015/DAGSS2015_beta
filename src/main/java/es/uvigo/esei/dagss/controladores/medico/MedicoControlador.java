@@ -251,6 +251,7 @@ public class MedicoControlador implements Serializable {
     }
     public String doShowTratamiento(Tratamiento tratamientoActual) {
         this.tratamientoActual=tratamientoActual;
+        cargarRecetas();
         return "detallesTratamiento";
     }
     public String doNewDay(Date dia) {  

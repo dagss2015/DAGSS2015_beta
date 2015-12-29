@@ -22,20 +22,25 @@
             
                 <h:form>
                         <p:column headerText="FechaInicio">
+                            inicio validez: 
                             <p:calendar id="event" value="#{medicoControlador.recetaActual.inicioValidez}">
                          
                         </p:calendar>
                        
                          </p:column>
                          <p:column headerText="FechaFinal">
+                             final validez:
                              <p:calendar id="event2" value="#{medicoControlador.recetaActual.finValidez}">
                            
                         </p:calendar> 
                         </p:column>
                     
                      <h:panelGrid id="f" columns="1">
+                         indicaciones:
                         <h:inputText value="#{medicoControlador.prescripcionActual.indicaciones}"/>
+                        dosis:
                         <h:inputText value="#{medicoControlador.prescripcionActual.dosis}"/>
+                        farmacia(Farmacia de prueba):
                         <h:inputText value="#{medicoControlador.farmacia}"/>
                        
                     </h:panelGrid>
