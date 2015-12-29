@@ -23,29 +23,24 @@
                 <h:form>
                         <p:column headerText="FechaInicio">
                             <p:calendar id="event" value="#{medicoControlador.recetaActual.inicioValidez}">
-                            <p:ajax event="dateSelect" update="f"/>
+                         
                         </p:calendar>
                        
                          </p:column>
                          <p:column headerText="FechaFinal">
                              <p:calendar id="event2" value="#{medicoControlador.recetaActual.finValidez}">
-                            <p:ajax event="dateSelect" update="f"/>
+                           
                         </p:calendar> 
                         </p:column>
-                     <p:column headerText="comentarios">
-                     <h:inputTextarea value="#{medicoControlador.tratamientoActual.comentarios}">
-                         <p:ajax event="keyup" update="f"/>
-                    </h:inputTextarea>
-                     </p:column>
+                    
                      <h:panelGrid id="f" columns="1">
-                         <h:outputText value="#{medicoControlador.tratamientoActual.medico.nombre}"/>
-                        <h:outputText value="#{medicoControlador.letMe()}"/>
-                        <h:outputText value="#{medicoControlador.tratamientoActual.fechaInicio}"/>
-                        <h:outputText value="#{medicoControlador.tratamientoActual.fechaFin}"/>
-                        <h:outputText value="#{medicoControlador.tratamientoActual.comentarios}"/>
+                        <h:inputText value="#{medicoControlador.prescripcionActual.indicaciones}"/>
+                        <h:inputText value="#{medicoControlador.prescripcionActual.dosis}"/>
+                        <h:inputText value="#{medicoControlador.farmacia}"/>
+                       
                     </h:panelGrid>
-                        <h:commandButton  value="Guardar" action="#{medicoControlador.guardarTratamiento}"/>
-                        <h:commandButton  value="Volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
+                        <h:commandButton  value="Guardar" action="#{medicoControlador.guardarReceta}"/>
+                        <h:commandButton  value="Volver" action="#{medicoControlador.doShowTratamiento(medicoControlador.tratamientoActual)}"/>               
                 </h:form>
 
 

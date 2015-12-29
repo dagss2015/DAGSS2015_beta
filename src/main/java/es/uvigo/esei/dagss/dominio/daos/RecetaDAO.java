@@ -15,8 +15,8 @@ import javax.persistence.Query;
 public class RecetaDAO extends GenericoDAO<Receta>{
      
      public List<Receta> getRecetaTratamiento(Long idReceta){
-       Query q = em.createQuery("SELECT r FROM Receta AS r "
-                + "  WHERE (r.prescripcion.tratamiento.id = :idTratamiento) ");
+       Query q = em.createQuery("SELECT   r  FROM  Receta  AS r "
+                + "  WHERE (r.prescripcion.tratamiento.id = :idReceta) ");
         q.setParameter("idReceta", idReceta);
         return q.getResultList();
    }

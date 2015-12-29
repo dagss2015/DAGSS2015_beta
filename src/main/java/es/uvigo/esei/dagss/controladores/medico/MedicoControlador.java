@@ -5,6 +5,8 @@ package es.uvigo.esei.dagss.controladores.medico;
 
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
+import es.uvigo.esei.dagss.dominio.daos.FarmaciaDAO;
+import es.uvigo.esei.dagss.dominio.daos.MedicamentoDAO;
 import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PacienteDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
@@ -12,6 +14,9 @@ import es.uvigo.esei.dagss.dominio.daos.TratamientoDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
 import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
+import es.uvigo.esei.dagss.dominio.entidades.EstadoReceta;
+import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
+import es.uvigo.esei.dagss.dominio.entidades.Medicamento;
 import es.uvigo.esei.dagss.dominio.entidades.TipoUsuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -24,6 +29,7 @@ import es.uvigo.esei.dagss.dominio.entidades.Paciente;
 import es.uvigo.esei.dagss.dominio.entidades.Prescripcion;
 import es.uvigo.esei.dagss.dominio.entidades.Receta;
 import es.uvigo.esei.dagss.dominio.entidades.Tratamiento;
+import static java.lang.Math.round;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,6 +46,8 @@ import org.primefaces.event.SelectEvent;
 public class MedicoControlador implements Serializable {
 
     private Medico medicoActual;
+    private String farmacia;
+    private String medicamento;
     private String dni;
     private String numeroColegiado;
     private String password;
@@ -47,7 +55,9 @@ public class MedicoControlador implements Serializable {
     private Date diaActual;
     private Tratamiento tratamientoActual;
     private Receta recetaActual;
+    private Farmacia farmaciaActual;
     private Prescripcion prescripcionActual;
+    private Medicamento medicamentoActual;
     private List<Paciente> pacientes;
     private List<Cita> citasMedico;
     private List<Tratamiento> tratamientos;
@@ -65,8 +75,12 @@ public class MedicoControlador implements Serializable {
     private CitaDAO citaDAO;
     @EJB
     private TratamientoDAO tratamientoDAO;
-     @EJB
+    @EJB
     private RecetaDAO recetaDAO;
+    @EJB
+    private MedicamentoDAO medicamentoDAO;
+     @EJB
+    private FarmaciaDAO farmaciaDAO;
 
     /**
      * Creates a new instance of AdministradorControlador
@@ -76,6 +90,21 @@ public class MedicoControlador implements Serializable {
     }
     public void letMe(){
         System.out.println(tratamientos.get(0).getPaciente().getNombre());
+    }
+    public void setFarmacia(String name){
+        farmacia=name;
+    }
+    public void setMedicamento(String name){
+        medicamento=name;
+    }
+    public String getMedicamento(){
+        return medicamento;
+    }
+    public void cargarMedicamento(){
+        //medicamentoActual=medicamentoDAO.getMedicamentoNombre(medicamento);
+    }
+    public void cargarFarmacia(){
+        farmaciaActual=farmaciaDAO.getFarmaciaNombre(farmacia);
     }
     public void cargarRecetas(){
         recetas=recetaDAO.getRecetaTratamiento(tratamientoActual.getId());
@@ -91,6 +120,9 @@ public class MedicoControlador implements Serializable {
     }
     public Receta getRecetaActual(){
         return recetaActual;
+    }
+    public  String getFarmacia(){
+        return farmacia;
     }
     public Date getDiaActual(){
         return diaActual;
@@ -150,6 +182,9 @@ public class MedicoControlador implements Serializable {
     public void setMedicoActual(Medico medicoActual) {
         this.medicoActual = medicoActual;
     }
+    public Prescripcion getPrescripcionActual(){
+            return prescripcionActual;
+    }
 
     private boolean parametrosAccesoInvalidos() {
         return (((dni == null) && (numeroColegiado == null)) || (password == null));
@@ -198,7 +233,14 @@ public class MedicoControlador implements Serializable {
     public String doNewReceta(){
         prescripcionActual = new Prescripcion();
         recetaActual=new Receta();
+        
         return "newReceta";
+    }
+    /////SUPUESTAMENTE AKI UN NULL POINTER
+    public void cantidadMedicamento(){
+   
+       // recetaActual.setCantidad(round(y/x));
+       recetaActual.setCantidad(2);
     }
     
     
@@ -248,6 +290,16 @@ public class MedicoControlador implements Serializable {
     public void guardarTratamiento(){
         tratamientoDAO.actualizar(tratamientoActual);
         cargarTratamientos();
+    }
+    public void guardarReceta(){
+        Medicamento med=new Medicamento("termal", "agua", "yo", "Coello", 2);
+        cantidadMedicamento();
+        prescripcionActual.setMedicamento(med);
+        recetaActual.setFarmacia(farmaciaActual);
+        prescripcionActual.setTratamiento(tratamientoActual);
+        recetaActual.setPrescripcion(prescripcionActual);  
+        recetaDAO.actualizar(recetaActual);
+        cargarRecetas();
     }
 
 }
