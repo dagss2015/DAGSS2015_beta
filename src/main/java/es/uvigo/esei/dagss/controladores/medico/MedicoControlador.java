@@ -64,7 +64,8 @@ public class MedicoControlador implements Serializable {
     private List<Tratamiento> tratamientos;
     private List<Receta> recetas;
     private List<Medicamento> medicamentoActualList;
-     private List<Prescripcion >prescripciones;
+    private List<Prescripcion> prescripciones;
+    private List<Farmacia> farmacias;
 
     @Inject
     private AutenticacionControlador autenticacionControlador;
@@ -142,6 +143,9 @@ public class MedicoControlador implements Serializable {
     }
     public List<Receta> getRecetas(){
         return recetas;
+    }
+    public List<Farmacia> getFarmacias(){
+        return farmacias;
     }
     public List<Tratamiento> getTratamientos(){
         return tratamientos;
@@ -263,6 +267,11 @@ public class MedicoControlador implements Serializable {
         cargarPrescripciones();
         cargarRecetas();
         return "detallesTratamiento";
+    }
+    public String doShowReceta(Prescripcion prescripcionActual){
+        this.prescripcionActual=prescripcionActual;
+        cargarRecetas();
+        return "detallesReceta";
     }
     public String doNewDay(Date dia) {  
         diaActual=dia;

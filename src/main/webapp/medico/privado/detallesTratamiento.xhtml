@@ -33,33 +33,17 @@
                         
                         <h:column>
                             Prescripcion:
-                            medicamento:
-                            <h:outputText value="#{prescripcion.medicamento}"/>
+                            <h:outputText value="Medicamento: #{prescripcion.medicamento}"/>
                         </h:column>
                         <h:column>
-                            dosis:
-                            <h:outputText value="#{prescripcion.dosis}"/>
+                            <h:outputText value="Dosis: #{prescripcion.dosis}"/>
                         </h:column>
                         <h:column>
-                            indicaciones:
-                            <h:outputText value="#{prescripcion.indicaciones}"/>
+                            <h:outputText value="Indicaciones: #{prescripcion.indicaciones}"/>
                         </h:column>
-                      
-                        <h:dataTable id="panelRecetas" value="#{prescripcion.recetas}" var="receta" >
-                            <h:column>
-                                  Receta:
-                                <h:outputText value="#{receta.cantidad}"/>
-                            </h:column>
-                            <h:column>
-                                <h:outputText value="#{receta.inicioValidez}"/>
-                            </h:column>
-                            <h:column>
-                                <h:outputText value="#{receta.finValidez}"/>
-                            </h:column>
-                            <h:column>
-                                <h:outputText value="#{receta.farmacia.nombreFarmacia}"/>
-                            </h:column>
-                        </h:dataTable>
+                        <h:column>
+                            <h:commandButton  value="Recetas" action="#{medicoControlador.doShowReceta(prescripcion)}"/>
+                        </h:column>
                     </h:dataTable>
                     <h:commandButton  value="Nueva Prescripcion" action="#{medicoControlador.doNewReceta()}"/>
                     <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
