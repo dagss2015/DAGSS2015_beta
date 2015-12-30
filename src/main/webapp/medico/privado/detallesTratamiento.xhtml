@@ -5,13 +5,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <body>
 
         <ui:composition template="/plantillas/plantillaGlobal.xhtml">
 
             <ui:define name="Agenda Diaria">
-               Agenda Diaria
+                Agenda Diaria
             </ui:define>
 
             <ui:define name="izquierda">
@@ -19,38 +19,50 @@
             </ui:define>
 
             <ui:define name="contenido">
-            
+
                 <h:form>
-                    
-                        <h:panelGrid id="tratamiento" columns="1">
-                            
-                            <h:outputText value="Nombre: #{medicoControlador.tratamientoActual.paciente.nombre}"/>
-                            <h:outputText value="Descripción: #{medicoControlador.tratamientoActual.comentarios}"/>
-                            <h:outputText value="Fecha inicio: #{medicoControlador.tratamientoActual.fechaInicio}"/>
-                            <h:outputText value="Fecha fin: #{medicoControlador.tratamientoActual.fechaFin}"/>                       
-                       </h:panelGrid>
-                         <h:dataTable id="panelRecetas" value="#{medicoControlador.recetas}" var="receta" >
+
+                    <h:panelGrid id="tratamiento" columns="1">
+
+                        <h:outputText value="Nombre: #{medicoControlador.tratamientoActual.paciente.nombre}"/>
+                        <h:outputText value="Descripción: #{medicoControlador.tratamientoActual.comentarios}"/>
+                        <h:outputText value="Fecha inicio: #{medicoControlador.tratamientoActual.fechaInicio}"/>
+                        <h:outputText value="Fecha fin: #{medicoControlador.tratamientoActual.fechaFin}"/>                       
+                    </h:panelGrid>
+                    <h:dataTable id="panelPrescripciones" value="#{medicoControlador.prescripciones}" var="prescripcion" >
+                        
                         <h:column>
-                            <h:outputText value="#{receta.cantidad}"/>
-                        </h:column>
-                        <h:column>
-                            <h:outputText value="#{receta.inicioValidez}"/>
-                        </h:column>
-                        <h:column>
-                            <h:outputText value="#{receta.finValidez}"/>
+                            Prescripcion:
+                            medicamento:
+                            <h:outputText value="#{prescripcion.medicamento}"/>
                         </h:column>
                         <h:column>
-                            <h:outputText value="#{receta.farmacia.nombreFarmacia}"/>
+                            dosis:
+                            <h:outputText value="#{prescripcion.dosis}"/>
                         </h:column>
-                         <h:column>
-                            <h:outputText value="#{receta.prescripcion.medicamento}"/>
+                        <h:column>
+                            indicaciones:
+                            <h:outputText value="#{prescripcion.indicaciones}"/>
                         </h:column>
-                             <h:column>
-                            <h:outputText value="#{receta.prescripcion.dosis}"/>
-                        </h:column>
-                      </h:dataTable>
-                    <h:commandButton  value="Nueva Receta" action="#{medicoControlador.doNewReceta()}"/>
-                      <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
+                      
+                        <h:dataTable id="panelRecetas" value="#{prescripcion.recetas}" var="receta" >
+                            <h:column>
+                                  Receta:
+                                <h:outputText value="#{receta.cantidad}"/>
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{receta.inicioValidez}"/>
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{receta.finValidez}"/>
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{receta.farmacia.nombreFarmacia}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:dataTable>
+                    <h:commandButton  value="Nueva Prescripcion" action="#{medicoControlador.doNewReceta()}"/>
+                    <h:commandButton  value="volver" action="#{medicoControlador.doShowCita(medicoControlador.citaActual)}"/>               
                 </h:form>
 
 

@@ -20,13 +20,10 @@ public class FarmaciaDAO extends GenericoDAO<Farmacia> {
 
         return filtrarResultadoUnico(q);
     }
-     public List<Farmacia> getFarmacias(){
-       Query q = em.createQuery("SELECT * FROM Farmacia ");
-        return q.getResultList();
-   }
+
      public Farmacia getFarmaciaNombre(String name){
          Query q = em.createQuery("SELECT f FROM Farmacia AS f "
-                + "  WHERE (f.nombre LIKE :nombre) ");
+                + "  WHERE (f.nombreFarmacia LIKE :nombre) ");
         q.setParameter("nombre",name);        
         return filtrarResultadoUnico(q); 
     }

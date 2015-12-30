@@ -12,13 +12,9 @@ import javax.persistence.Query;
 @Stateless
 @LocalBean
 public class MedicamentoDAO extends GenericoDAO<Medicamento> {
-    public List<Medicamento> getMedicamentos(){
-       Query q = em.createQuery("SELECT * FROM Receta ");
-        return q.getResultList();
-   }
-    public Medicamento getMedicamentoNombre(String name){
+     public Medicamento getMedicamentoId(long name){
          Query q = em.createQuery("SELECT m FROM Medicamento AS m "
-                + "  WHERE (m.nombre LIKE :patron)");
+                + "  WHERE (m.id LIKE :nombre) ");
         q.setParameter("nombre",name);        
         return filtrarResultadoUnico(q); 
     }

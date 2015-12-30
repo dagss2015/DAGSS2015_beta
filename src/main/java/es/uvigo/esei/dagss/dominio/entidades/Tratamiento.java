@@ -111,7 +111,7 @@ public class Tratamiento implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public List<Prescripcion> getPrescipciones() {
+    public List<Prescripcion> getPrescripciones() {
         return prescipciones;
     }
 
