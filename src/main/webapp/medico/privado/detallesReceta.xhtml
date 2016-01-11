@@ -43,7 +43,7 @@ and open the template in the editor.
                                 <h:outputText value="Nombre farmacia: #{receta.farmacia.nombreFarmacia}"/>
                             </h:column>
                         </h:dataTable>
-                    <h:commandButton  value="volver" action="#{medicoControlador.doShowTratamiento(tratamientoActual)}"/>
+                    <h:commandButton  value="volver" action="#{medicoControlador.doShowTratamiento(medicoControlador.tratamientoActual)}"/>
                 </h:form>
             </ui:define>
         </ui:composition>

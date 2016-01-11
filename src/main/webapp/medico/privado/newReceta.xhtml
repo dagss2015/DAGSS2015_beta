@@ -39,7 +39,9 @@
                          indicaciones:
                         <h:inputText value="#{medicoControlador.prescripcionActual.indicaciones}"/>
                         dosis:
-                        <h:inputText value="#{medicoControlador.prescripcionActual.dosis}"/>
+                        <h:inputText value="#{medicoControlador.prescripcionActual.dosis}" >
+                                     <f:validateLongRange minimum="1" maximum="50" />
+                        </h:inputText>
                         farmacia(Farmacia de prueba):
                         <h:inputText value="#{medicoControlador.farmacia}"/>
                          id medicamento(termal)

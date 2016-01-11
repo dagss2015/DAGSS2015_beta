@@ -35,6 +35,7 @@
                      <p:column headerText="comentariosl">
                      <h:inputTextarea value="#{medicoControlador.tratamientoActual.comentarios}">
                          <p:ajax event="keyup" update="f"/>
+                         <f:validateLength maximum="300"/>
                     </h:inputTextarea>
                      </p:column>
                      <h:panelGrid id="f" columns="1">
